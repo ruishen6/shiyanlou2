@@ -20,5 +20,5 @@ from share.views import HomeView,DisplayView
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$',HomeView.as_view(),name='home'),
-    url(r'^s/(?P<code>\d+)/$',DispalyView.as_view()),
+    url(r'^s/(?P<code>\d+)/$',DisplayView.as_view()),
 ]
