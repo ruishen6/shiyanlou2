@@ -15,11 +15,12 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 
-from share.views import HomeView,DisplayView,MyView
+from share.views import HomeView,DisplayView,MyView,SearchView
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$',HomeView.as_view(),name='home'),
     url(r'^s/(?P<code>\d+)/$',DisplayView.as_view()),
     url(r'^my/$',MyView.as_view(),name='MY')
+    url(r'^search/$',SearchView.as_view(),name='search'),
 ]

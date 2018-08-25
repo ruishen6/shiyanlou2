@@ -50,3 +50,21 @@ class MyView(View):
             i.save()
         return render(request,'content.html',{"content":u})
 
+class SearchView(View):
+    def get(self,request):
+        code = reques.GET.get("kw")
+        u = Upload.objects.filter(name=str(code))
+        data = {}
+        if u:
+            for i in range(len(u)):
+                u[i].DownloadDocount +=1
+                u[i].save()
+                data[i]={}
+                data[i]['download'] = u[i].DownloadDocount
+                data[i]['filename'] = u[i].name
+                data[i]['id'] = u[i].id
+                data[i]['ip'] = str(u[i].PCIP)
+                data[i]['size'] = u[i].Filesize
+                data[i]['time'] = str(u[i].Datatime.strftime('%Y-%m-%d %H:%M')
+                data[i]['key'] = u[i].code
+            return HttpResponse(json.dumps(data),content_type='application/json')
