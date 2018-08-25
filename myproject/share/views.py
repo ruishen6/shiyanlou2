@@ -40,3 +40,13 @@ class DisplayView(View):
                 i.DownloadDocount +=1
                 i.save()
         return render(request,'content.html',{"content":u})
+
+class MyView(View):
+    def get(self,request):
+        IP = request.META['REMOTE_ADDR']
+        u = Upload.objects.filter(PCMAC=str(IP))
+        for i in u:
+            i.DownloadDocount +=1
+            i.save()
+        return render(request,'content.html',{"content":u})
+
